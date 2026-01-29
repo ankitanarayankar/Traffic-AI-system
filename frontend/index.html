@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Traffic AI Dashboard</title>
+    <style>
+        .low {
+        color: green;
+        font-weight: bold;
+}
+        .medium {
+        color: orange;
+         font-weight: bold;
+}
+        .high {
+         color: red;
+        font-weight: bold;
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .card {
+    background: white;
+    width: 320px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+        h2 {
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Traffic Analysis</h2>
+    <p><b>Vehicle Count:</b> <span id="vehicles">-</span></p>
+    <p><b>Traffic Density:</b> <span id="density">-</span></p>
+    <p><b>Green Signal Time:</b> <span id="time">-</span> seconds</p>
+    <button onclick="getTraffic()">Refresh Data</button>
+</div>
+
+<script>
+    function getTraffic() {
+        fetch("http://127.0.0.1:5000/traffic")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("vehicles").innerText = data.vehicle_count;
+                document.getElementById("time").innerText = data.signal_time;
+
+                const densityEl = document.getElementById("density");
+                densityEl.innerText = data.traffic_density;
+
+                densityEl.className = ""; // reset
+                if (data.traffic_density === "Low") {
+                    densityEl.classList.add("low");
+                } else if (data.traffic_density === "Medium") {
+                    densityEl.classList.add("medium");
+                } else {
+                    densityEl.classList.add("high");
+                }
+            })
+            .catch(error => {
+                alert("Backend not running!");
+                console.error(error);
+            });
+    }
+
+    getTraffic();
+</script>
+
+
+</body>
+</html>
