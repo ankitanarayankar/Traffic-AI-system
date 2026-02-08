@@ -1,0 +1,60 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #0f172a, #020617);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #e5e7eb;
+}
+
+.card {
+    background: rgba(2, 6, 23, 0.9);
+    padding: 30px 40px;
+    width: 420px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+}
+
+.card h2 {
+    text-align: center;
+    color: #38bdf8;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 25px;
+}
+
+.stats p {
+    font-size: 18px;
+    margin: 12px 0;
+}
+
+.low { color: #22c55e; font-weight: bold; }
+.medium { color: #facc15; font-weight: bold; }
+.high { color: #ef4444; font-weight: bold; }
+
+.signal {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.light {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #475569;
+    opacity: 0.3;
+}
+
+.active { opacity: 1; }
+
+.red.active { background: #ef4444; }
+.yellow.active { background: #facc15; }
+.green.active { background: #22c55e; }
